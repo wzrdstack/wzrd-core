@@ -30,5 +30,11 @@
       "error",
       { "ignoreDeclarationSort": true, "ignoreCase": true }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.ts"],
+      "rules": {}
+    }
+  ]
 }
