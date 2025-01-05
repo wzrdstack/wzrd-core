@@ -1,12 +1,12 @@
-import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
-import _import from "eslint-plugin-import";
-import eslintComments from "eslint-plugin-eslint-comments";
-import functional from "eslint-plugin-functional";
-import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import js from "@eslint/js";
+
+import { fixupConfigRules, fixupPluginRules } from "@eslint/compat";
 import { FlatCompat } from "@eslint/eslintrc";
+import js from "@eslint/js";
+import tsParser from "@typescript-eslint/parser";
+import eslintComments from "eslint-plugin-eslint-comments";
+import _import from "eslint-plugin-import";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,14 +23,11 @@ export default [{
     "plugin:eslint-comments/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript",
-    "plugin:functional/lite",
     "prettier",
-    "prettier/@typescript-eslint",
 )), {
     plugins: {
         import: fixupPluginRules(_import),
         "eslint-comments": fixupPluginRules(eslintComments),
-        functional: functional,
     },
 
     languageOptions: {
@@ -39,14 +36,8 @@ export default [{
             console: true,
             WebAssembly: true,
         },
-
-        parser: tsParser,
         ecmaVersion: 5,
         sourceType: "script",
-
-        parserOptions: {
-            project: "./tsconfig.json",
-        },
     },
 
     rules: {
@@ -73,5 +64,11 @@ export default [{
     },
 }, {
     files: ["src/**/*.ts"],
+    languageOptions: {
+        parser: tsParser,
+        parserOptions: {
+            project: ["./tsconfig.json"],
+        },
+    },
     rules: {},
 }];
